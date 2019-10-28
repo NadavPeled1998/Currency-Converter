@@ -59,26 +59,18 @@
     </div>
 
     <script type="text/javascript">
-
-      const option = document.querySelectorAll("option")
-      let money = []
-      let Money = []
-      let interval
+    
       let json
-      let i = 0
-      let a = 0
-      let amount = document.querySelector("input").value
       let Selector1
       let Selector2
 
       function makeConvert(){
-        var httpRequest = new XMLHttpRequest();
+        const httpRequest = new XMLHttpRequest();
         httpRequest.onload = function(){
           if (httpRequest.status === 200){
             json = JSON.parse(httpRequest.responseText);
           }else {
-            alert('shit')
-            console.log('shit')}
+            alert('There is an error')}
             let amount = document.querySelector("input").value
             if(amount>0){
           document.querySelector(".box-2").innerHTML ="Updated on:"+json.date;
@@ -87,22 +79,20 @@
             for(v in json.rates){
               if (selector1 === v){
                 Selector1 = json.rates[v]
-                console.log(Selector1)
-              break}
+                break}
               else{
               Selector1 = 1;}
             }
             for(v in json.rates){
               if(selector2 === v){
                 Selector2 = json.rates[v]
-                console.log(Selector2)
                 break}
               else {
                 Selector2 = 1;
               }
             }
             let selector = Selector2/Selector1;
-            result= amount*selector
+            let result = amount*selector
             document.querySelector(".response").innerHTML = selector2 +" "+result;
           }}
         httpRequest.open('GET','https://api.exchangeratesapi.io/latest')
